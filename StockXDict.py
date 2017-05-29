@@ -15,13 +15,3 @@ sneakers = {'Nike Flyknit Racer No Parking' : '4a6df82c-1279-4cd9-a5a0-eaaed1da4
 }
 
 columns = ['createdAt','amount', 'shoeSize']
-
-
-#Jordan1Royal 61184
-#NoParking 373
-#zebra 343
-#motorsport 377
-#kith nmd cs2 64
-#reese sb 403
-
-#4/21/17 since I can't get a good sample of twitter data for each shoe in a decent timeline, I'm considering using articles from sneaker blogs and their comment counts.
