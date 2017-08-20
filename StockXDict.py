@@ -11,7 +11,7 @@ sneakers = {'Nike Flyknit Racer No Parking' : '4a6df82c-1279-4cd9-a5a0-eaaed1da4
             'Jordan 4 Retro Kaws' : '88312ee1-19dd-4af8-bf5d-4e285bff05d9', #added 4/20/17
             'Adidas Yeezy Boost 350 V2 Cream White' : '49c52f79-b1c5-4200-9792-b9d55f67a76f', #added 4/20/17
             'Air More Uptempo Supreme -Suptempo- Gold' : 'cebe3a63-d21b-45a6-9784-3a94fa6cffcb', # added 4/27/17
-            
+            'Nike Flyknit Trainer White Black (2017)' : '97d3200c-2604-4bc1-b0bc-aba01c80eb48'
 }
 
 columns = ['createdAt','amount', 'shoeSize']
