@@ -4,7 +4,7 @@ import pandas as pd
 import requests
 
 def scrape(productID):
-    url = 'https://stockx.com/api/v1/products/' + productID + '/activity?state=480' 
+    url = 'https://stockx.com/api/products/' + productID + '/activity?state=480' 
     page = requests.get(url)
     data = page.text
     df = pd.read_json(data)
