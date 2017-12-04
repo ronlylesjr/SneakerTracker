@@ -2,6 +2,7 @@ from StockXDict import sneakers, columns, streetwear
 import os
 import pandas as pd
 import requests
+import concurrent.futures
 
 def scrape(productID):
     url = 'https://stockx.com/api/products/' + productID + '/activity?state=480' 
@@ -14,8 +15,8 @@ def scrape(productID):
         pass
     return(df)
     
-def update():
-    for sneaker in sneakers.items():
+def update(sneakerlist):
+    for sneaker in sneakerlist:
         df = scrape(sneaker[1])
         path = 'sneaker_sales/' + sneaker[0] + '.csv'
         
@@ -32,8 +33,8 @@ def update():
                 
         df.to_csv(path)
 
-def swupdate():
-	for piece in streetwear.items():
+def swupdate(streetwearlist):
+	for piece in streetwearlist:
 		df = scrape(piece[1])
 		path = 'streetwear_sales/' + piece[0] + '.csv'
         
@@ -53,5 +54,8 @@ def swupdate():
 
 
 if __name__ == '__main__':
-    update()
-    swupdate()
+	with concurrent.futures.ProcessPoolExecutor() as executor:
+		executor.submit(update, list(sneakers.items()))
+		executor.submit(swupdate, list(streetwear.items()))
+    # update(sneakers.items())
+    # swupdate(streetwear.items())
