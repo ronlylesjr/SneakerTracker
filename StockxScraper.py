@@ -57,5 +57,3 @@ if __name__ == '__main__':
 	with concurrent.futures.ProcessPoolExecutor() as executor:
 		executor.submit(update, list(sneakers.items()))
 		executor.submit(swupdate, list(streetwear.items()))
-    # update(sneakers.items())
-    # swupdate(streetwear.items())
