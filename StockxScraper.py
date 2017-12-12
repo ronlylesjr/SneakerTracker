@@ -14,43 +14,42 @@ def scrape(productID):
     except:
         pass
     return(df)
+
+def construct_df(df1, OGdf):
+	df = pd.concat([df1, OGdf], join='inner', ignore_index=True, axis=0)
+	df.drop_duplicates(keep='first', inplace=True)
+	df['createdAt'] = df['createdAt'].replace('T', ' ')
+	df['createdAt'] = pd.to_datetime(df['createdAt'], format='%Y%m%d %H:%M') #infer_datetime_format=True
+	df.sort_values(by='createdAt', ascending=False)
+	df.index = range(0, len(df))
+	return df
+
     
 def update(sneakerlist):
     for sneaker in sneakerlist:
         df = scrape(sneaker[1])
-        path = 'sneaker_sales/' + sneaker[0] + '.csv'
+        path = f'sneaker_sales/{sneaker[0]}.csv'
         
         if os.path.isfile(path):
             OGdf = pd.read_csv(path)
             
             if not OGdf.empty:
-                df = pd.concat([df, OGdf], join='inner', ignore_index=True, axis=0)
-                df.drop_duplicates(keep='first', inplace=True)
-                df['createdAt'] = df['createdAt'].replace('T', ' ')
-                df['createdAt'] = pd.to_datetime(df['createdAt'], format='%Y%m%d %H:%M') #infer_datetime_format=True
-                df.sort_values(by='createdAt', ascending=False)
-                df.index = range(0, len(df))
-                
+              df = construct_df(df, OGdf)
+
         df.to_csv(path)
 
 def swupdate(streetwearlist):
 	for piece in streetwearlist:
 		df = scrape(piece[1])
-		path = 'streetwear_sales/' + piece[0] + '.csv'
+		path = f'streetwear_sales/{piece[0]}.csv'
         
 		if os.path.isfile(path):
 			OGdf = pd.read_csv(path)
 		    
 			if not OGdf.empty:
-				df = pd.concat([df, OGdf], join='inner', ignore_index=True, axis=0)
-				df.drop_duplicates(keep='first', inplace=True)
-				df['createdAt'] = df['createdAt'].replace('T', ' ')
-				df['createdAt'] = pd.to_datetime(df['createdAt'], format='%Y%m%d %H:%M') #infer_datetime_format=True
-				df.sort_values(by='createdAt', ascending=False)
-				df.index = range(0, len(df))
+				df = construct_df(df, OGdf)
 		        
 		df.to_csv(path)
-
 
 
 if __name__ == '__main__':
