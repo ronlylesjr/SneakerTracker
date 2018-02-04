@@ -5,7 +5,7 @@ import requests
 import concurrent.futures
 
 def scrape(productID):
-    url = f'https://stockx.com/api/products/{productID }/activity?state=480' 
+    url = f'https://stockx.com/api/products/{productID}/activity?state=480' 
     page = requests.get(url)
     data = page.text
     df = pd.read_json(data)
